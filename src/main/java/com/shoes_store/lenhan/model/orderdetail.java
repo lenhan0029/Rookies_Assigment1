@@ -9,25 +9,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="order_details")
-public class order_detail {
+@Table(name="orderdetails")
+public class orderdetail {
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="order_id")
+	@JoinColumn(name="orderid")
 	private order order;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="quantity_id")
+	@JoinColumn(name="quantityid")
 	private quantity quantitys;
 	private Integer quantity;
-	public order_detail() {
+	public orderdetail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public order_detail(Integer id, com.shoes_store.lenhan.model.order order,
+	public orderdetail(Integer id, com.shoes_store.lenhan.model.order order,
 			com.shoes_store.lenhan.model.quantity quantitys, Integer quantity) {
 		super();
 		this.id = id;
@@ -61,7 +61,7 @@ public class order_detail {
 	}
 	@Override
 	public String toString() {
-		return "order_detail [id=" + id + ", order=" + order + ", quantitys=" + quantitys + ", quantity=" + quantity
+		return "orderdetail [id=" + id + ", order=" + order + ", quantitys=" + quantitys + ", quantity=" + quantity
 				+ "]";
 	}
 	

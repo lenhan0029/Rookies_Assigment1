@@ -16,9 +16,9 @@ public class customer {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	private String customer_name;
+	private String customername;
 	private String email;
-	private String phone_number;
+	private String phonenumber;
 	private String address;
 	private String gender;
 	private Integer age;
@@ -28,13 +28,13 @@ public class customer {
 		// TODO Auto-generated constructor stub
 	}
 
-	public customer(Integer id, String customer_name, String email, String phone_number, String address, String gender,
+	public customer(Integer id, String customername, String email, String phonenumber, String address, String gender,
 			Integer age) {
 		super();
 		this.id = id;
-		this.customer_name = customer_name;
+		this.customername = customername;
 		this.email = email;
-		this.phone_number = phone_number;
+		this.phonenumber = phonenumber;
 		this.address = address;
 		this.gender = gender;
 		this.age = age;
@@ -57,12 +57,12 @@ public class customer {
 		this.id = id;
 	}
 
-	public String getCustomer_name() {
-		return customer_name;
+	public String getCustomername() {
+		return customername;
 	}
 
-	public void setCustomer_name(String customer_name) {
-		this.customer_name = customer_name;
+	public void setCustomername(String customername) {
+		this.customername = customername;
 	}
 
 	public String getEmail() {
@@ -73,12 +73,12 @@ public class customer {
 		this.email = email;
 	}
 
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhone_number(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 	public String getAddress() {
@@ -107,7 +107,7 @@ public class customer {
 
 	@Override
 	public String toString() {
-		return "customer [id=" + id + ", customer_name=" + customer_name + ", email=" + email + ", phone_number="
-				+ phone_number + ", address=" + address + ", gender=" + gender + ", age=" + age + "]";
+		return "customer [id=" + id + ", customername=" + customername + ", email=" + email + ", phonenumber="
+				+ phonenumber + ", address=" + address + ", gender=" + gender + ", age=" + age + "]";
 	}
 }

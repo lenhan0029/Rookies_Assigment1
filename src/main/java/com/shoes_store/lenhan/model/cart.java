@@ -29,11 +29,11 @@ public class cart {
 	}
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="customer_id", referencedColumnName = "id")
+	@JoinColumn(name="customerid", referencedColumnName = "id")
 	private customer customer;
 	
 	@OneToMany(mappedBy = "cart")
-	private Collection<cart_detail> cart_detail;
+	private Collection<cartdetail> cartdetail;
 	public Integer getId() {
 		return id;
 	}

@@ -10,27 +10,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cart_details")
-public class cart_detail {
+@Table(name="cartdetails")
+public class cartdetail {
 	@Id
 	@GeneratedValue
 	private Integer id;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cart_id")
+	@JoinColumn(name="cartid")
 	private cart cart;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="quantity_id")
+	@JoinColumn(name="quantityid")
 	private quantity quantitys;
 	
 	private Integer quantity;
 
-	public cart_detail() {
+	public cartdetail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public cart_detail(com.shoes_store.lenhan.model.cart cart, com.shoes_store.lenhan.model.quantity quantitys,
+	public cartdetail(com.shoes_store.lenhan.model.cart cart, com.shoes_store.lenhan.model.quantity quantitys,
 			Integer quantity) {
 		super();
 		this.cart = cart;

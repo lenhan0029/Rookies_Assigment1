@@ -4,8 +4,11 @@ package com.shoes_store.lenhan.model;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,24 +18,31 @@ public class quantity {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="productid")
+	private product product;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="sizeid")
+	private size size;
 	private Integer quantity;
 	
 	@OneToMany(mappedBy = "quantitys")
-	private Collection<cart_detail> cart_details;
+	private Collection<cartdetail> cartdetails;
 	
 	@OneToMany(mappedBy = "quantitys")
-	private Collection<order_detail> order_details;
+	private Collection<orderdetail> orderdetails;
 
 	public quantity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public quantity(Integer id, Integer quantity, Collection<cart_detail> cart_details) {
+	public quantity(Integer id, Integer quantity, Collection<cartdetail> cartdetails) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
-		this.cart_details = cart_details;
+		this.cartdetails = cartdetails;
 	}
 
 	public Integer getId() {
@@ -51,17 +61,17 @@ public class quantity {
 		this.quantity = quantity;
 	}
 
-	public Collection<cart_detail> getCart_details() {
-		return cart_details;
+	public Collection<cartdetail> getCart_details() {
+		return cartdetails;
 	}
 
-	public void setCart_details(Collection<cart_detail> cart_details) {
-		this.cart_details = cart_details;
+	public void setCart_details(Collection<cartdetail> cartdetails) {
+		this.cartdetails = cartdetails;
 	}
 
 	@Override
 	public String toString() {
-		return "quantity [id=" + id + ", quantity=" + quantity + ", cart_details=" + cart_details + "]";
+		return "quantity [id=" + id + ", quantity=" + quantity + ", cart_details=" + cartdetails + "]";
 	}
 	
 }

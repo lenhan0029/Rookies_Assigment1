@@ -15,24 +15,24 @@ public class account {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	private String user_name;
+	private String username;
 	private String password;
 	public account() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public account(Integer id, String user_name, String password) {
+	public account(Integer id, String username, String password) {
 		super();
 		this.id = id;
-		this.user_name = user_name;
+		this.username = username;
 		this.password = password;
 	}
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="customer_id", referencedColumnName = "id")
+	@JoinColumn(name="customerid", referencedColumnName = "id")
 	private customer customer;
 	
 	@ManyToOne
-	@JoinColumn(name="role_id")
+	@JoinColumn(name="roleid")
 	private role role;
 	public Integer getId() {
 		return id;
@@ -40,11 +40,11 @@ public class account {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUser_name() {
-		return user_name;
+	public String getUsername() {
+		return username;
 	}
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
@@ -54,7 +54,7 @@ public class account {
 	}
 	@Override
 	public String toString() {
-		return "account [id=" + id + ", user_name=" + user_name + ", password=" + password + "]";
+		return "account [id=" + id + ", user_name=" + username + ", password=" + password + "]";
 	}
 	
 	

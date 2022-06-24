@@ -2,8 +2,8 @@ package com.shoes_store.lenhan.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.shoes_store.lenhan.model.order_detail;
+import com.shoes_store.lenhan.model.orderdetail;
 
-public interface order_detailRepository extends JpaRepository<order_detail, Integer>{
+public interface order_detailRepository extends JpaRepository<orderdetail, Integer>{
 
 }

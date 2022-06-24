@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,20 +16,20 @@ import javax.persistence.Table;
 @Table(name="brands")
 public class brand {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String brand_name;
+	private String brandname;
 	
 	
 	public brand() {
 		
 	}
-	public brand(String brand_name) {
-		this.brand_name=brand_name;
+	public brand(String brandname) {
+		this.brandname=brandname;
 	}
-	public brand(Integer id, String brand_name) {
+	public brand(Integer id, String brandname) {
 		this.id=id;
-		this.brand_name=brand_name;
+		this.brandname=brandname;
 	}
 
 	@OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -39,17 +40,17 @@ public class brand {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getBrand_name() {
-		return brand_name;
+	public String getBrandname() {
+		return brandname;
 	}
-	public void setBrand_name(String brand_name) {
-		this.brand_name = brand_name;
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
 	}
 	@Override
     public String toString() {
         return "Brand{" +
                 "id=" + id +
-                ", name='" + brand_name + '\'' +
+                ", name='" + brandname + '\'' +
                 '}';
     }
 }

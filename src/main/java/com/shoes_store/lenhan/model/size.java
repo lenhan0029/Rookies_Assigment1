@@ -3,14 +3,10 @@ package com.shoes_store.lenhan.model;
 
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -22,6 +18,8 @@ public class size {
 	@GeneratedValue
 	private Integer id;
 	private Integer size;
+	@OneToMany(mappedBy = "size")
+	private Collection<quantity> quantities;
 	public size() {
 		
 	}
@@ -35,11 +33,6 @@ public class size {
 		this.size=size;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="quantity",
-			joinColumns = @JoinColumn(name="size_id"),
-			inverseJoinColumns = @JoinColumn(name="product_id"))
-	private Collection<size> sizes;
 	
 	public Integer getId() {
 		return id;

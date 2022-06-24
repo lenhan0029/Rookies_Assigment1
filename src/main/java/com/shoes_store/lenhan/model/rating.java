@@ -16,25 +16,25 @@ public class rating {
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="product_id")
+	@JoinColumn(name="productid")
 	private product product;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="customer_id")
+	@JoinColumn(name="customerid")
 	private customer customer;
-	private Integer star_rating;
+	private Integer starrating;
 	private String comment;
 	public rating() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public rating(Integer id, com.shoes_store.lenhan.model.product product,
-			com.shoes_store.lenhan.model.customer customer, Integer star_rating, String comment) {
+			com.shoes_store.lenhan.model.customer customer, Integer starrating, String comment) {
 		super();
 		this.id = id;
 		this.product = product;
 		this.customer = customer;
-		this.star_rating = star_rating;
+		this.starrating = starrating;
 		this.comment = comment;
 	}
 	public Integer getId() {
@@ -55,11 +55,11 @@ public class rating {
 	public void setCustomer(customer customer) {
 		this.customer = customer;
 	}
-	public Integer getStar_rating() {
-		return star_rating;
+	public Integer getStarrating() {
+		return starrating;
 	}
-	public void setStar_rating(Integer star_rating) {
-		this.star_rating = star_rating;
+	public void setStar_rating(Integer starrating) {
+		this.starrating = starrating;
 	}
 	public String getComment() {
 		return comment;
@@ -69,7 +69,7 @@ public class rating {
 	}
 	@Override
 	public String toString() {
-		return "rating [id=" + id + ", product=" + product + ", customer=" + customer + ", star_rating=" + star_rating
+		return "rating [id=" + id + ", product=" + product + ", customer=" + customer + ", starrating=" + starrating
 				+ ", comment=" + comment + "]";
 	}
 	

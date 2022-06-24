@@ -16,14 +16,14 @@ public class category {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	private String category_name;
+	private String categoryname;
 	
 	public category() {
 	}
-	public category(Integer id, String category_name) {
+	public category(Integer id, String categoryname) {
 		super();
 		this.id = id;
-		this.category_name = category_name;
+		this.categoryname = categoryname;
 	}
 	
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
@@ -34,17 +34,17 @@ public class category {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getCategory_name() {
-		return category_name;
+	public String getCategoryname() {
+		return categoryname;
 	}
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setCategoryname(String categoryname) {
+		this.categoryname = categoryname;
 	}
 	@Override
     public String toString() {
         return "Brand{" +
                 "id=" + id +
-                ", name='" + category_name + '\'' +
+                ", name='" + categoryname + '\'' +
                 '}';
     }
 	

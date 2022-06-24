@@ -33,7 +33,7 @@ public class order {
 	private state state;
 
 	@OneToMany(mappedBy = "order")
-	private Collection<order_detail> order_details;
+	private Collection<orderdetail> orderdetails;
 	public order() {
 		super();
 		// TODO Auto-generated constructor stub

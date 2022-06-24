@@ -17,37 +17,40 @@ public class product {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	private String product_name;
+	private String productname;
 	private Integer price;
 	private String image;
-	private Date created_date;
-	private Date updated_date;
+	private Date createddate;
+	private Date updateddate;
 	private String description;
 	
 	public product() {
 	}
 
-	public product(Integer id, String product_name, Integer price, String image, Date created_date, Date updated_date,
+	public product(Integer id, String productname, Integer price, String image, Date createddate, Date updateddate,
 			String description) {
 		super();
 		this.id = id;
-		this.product_name = product_name;
+		this.productname = productname;
 		this.price = price;
 		this.image = image;
-		this.created_date = created_date;
-		this.updated_date = updated_date;
+		this.createddate = createddate;
+		this.updateddate = updateddate;
 		this.description = description;
 	}
 	
 	@ManyToOne
-	@JoinColumn(name="category_id")
+	@JoinColumn(name="categoryid")
 	private category category;
 
 	@ManyToOne
-	@JoinColumn(name="brand_id")
+	@JoinColumn(name="brandid")
 	private brand brand;
 	@OneToMany(mappedBy = "product")
 	private Collection<rating> ratings;
+	
+	@OneToMany(mappedBy = "product")
+	private Collection<quantity> quantities;
 	public Integer getId() {
 		return id;
 	}
@@ -56,12 +59,12 @@ public class product {
 		this.id = id;
 	}
 
-	public String getProduct_name() {
-		return product_name;
+	public String getProductname() {
+		return productname;
 	}
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setProduct_name(String productname) {
+		this.productname = productname;
 	}
 
 	public Integer getPrice() {
@@ -80,20 +83,20 @@ public class product {
 		this.image = image;
 	}
 
-	public Date getCreated_date() {
-		return created_date;
+	public Date getCreateddate() {
+		return createddate;
 	}
 
-	public void setCreated_date(Date created_date) {
-		this.created_date = created_date;
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
 	}
 
-	public Date getUpdated_date() {
-		return updated_date;
+	public Date getUpdateddate() {
+		return updateddate;
 	}
 
-	public void setUpdated_date(Date updated_date) {
-		this.updated_date = updated_date;
+	public void setUpdateddate(Date updateddate) {
+		this.updateddate = updateddate;
 	}
 
 	public String getDescription() {
@@ -106,8 +109,8 @@ public class product {
 
 	@Override
 	public String toString() {
-		return "product [id=" + id + ", product_name=" + product_name + ", price=" + price + ", image=" + image
-				+ ", created_date=" + created_date + ", updated_date=" + updated_date + ", description=" + description
+		return "product [id=" + id + ", productname=" + productname + ", price=" + price + ", image=" + image
+				+ ", createddate=" + createddate + ", updateddate=" + updateddate + ", description=" + description
 				+ "]";
 	}
 	
