@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.shoes_store.lenhan.dto.request.brandUpdateDTO;
 import com.shoes_store.lenhan.dto.response.brandResponseDTO;
-import com.shoes_store.lenhan.exceptions.brandNotFoundException;
 import com.shoes_store.lenhan.model.brand;
 import com.shoes_store.lenhan.repository.brandRepository;
 import com.shoes_store.lenhan.services.brandService;
@@ -33,17 +32,13 @@ public class brandServiceImpl implements brandService{
 	}
 
 	@Override
-	public brand getBrandById(Integer id) {
-		Optional<brand> brandoptional = this.brandrepository.findById(id);
-		if(brandoptional.isPresent()) {
-			brand brand = brandoptional.get();
-			return brand;
-		}
-		throw new brandNotFoundException();
+	public Optional<brand> getBrandById(Integer id) {
+		Optional<brand> brandoptional = brandrepository.findBrandById(id);
+		return brandoptional;
 	}
 
 	@Override
-	public brandResponseDTO getBranđDTOById(Integer id) {
+	public brandResponseDTO getBrandDTOById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -58,9 +53,6 @@ public class brandServiceImpl implements brandService{
 	@Override
 	public brandResponseDTO updateBrand(Integer id, brandUpdateDTO dto) {
 		Optional<brand> brandoptional = brandrepository.findById(id);
-		if (brandoptional.isEmpty()) {
-			throw new brandNotFoundException();
-		}
 		brand brand = brandoptional.get();
 		modelmapper.map(dto, brand);
 		brand = brandrepository.save(brand);
@@ -68,10 +60,8 @@ public class brandServiceImpl implements brandService{
 	}
 	@Override
 	public void deleteBrand(Integer id) {
-		Optional<brand> brandoptional = this.brandrepository.findById(id);
-		if(brandoptional.isPresent()) {
-			brandrepository.deleteById(id);
-			throw new brandNotFoundException("delete brand with id =" + id + "success" );
-		}
+		brandrepository.deleteById(id);
 	}
+
+	
 }

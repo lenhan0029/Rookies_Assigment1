@@ -27,8 +27,10 @@ public class product {
 	public product() {
 	}
 
+	
 	public product(Integer id, String productname, Integer price, String image, Date createddate, Date updateddate,
-			String description) {
+			String description, com.shoes_store.lenhan.model.category category,
+			com.shoes_store.lenhan.model.brand brand, Collection<rating> ratings, Collection<quantity> quantities) {
 		super();
 		this.id = id;
 		this.productname = productname;
@@ -37,8 +39,13 @@ public class product {
 		this.createddate = createddate;
 		this.updateddate = updateddate;
 		this.description = description;
+		this.category = category;
+		this.brand = brand;
+		this.ratings = ratings;
+		this.quantities = quantities;
 	}
-	
+
+
 	@ManyToOne
 	@JoinColumn(name="categoryid")
 	private category category;
@@ -66,6 +73,26 @@ public class product {
 	public void setProduct_name(String productname) {
 		this.productname = productname;
 	}
+
+	public category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(category category) {
+		this.category = category;
+	}
+
+
+	public brand getBrand() {
+		return brand;
+	}
+
+
+	public void setBrand(brand brand) {
+		this.brand = brand;
+	}
+
 
 	public Integer getPrice() {
 		return price;

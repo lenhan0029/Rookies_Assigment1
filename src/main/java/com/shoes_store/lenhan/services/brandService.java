@@ -1,6 +1,7 @@
 package com.shoes_store.lenhan.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.shoes_store.lenhan.dto.request.brandUpdateDTO;
 import com.shoes_store.lenhan.dto.response.brandResponseDTO;
@@ -10,9 +11,9 @@ public interface brandService {
 	
 	public List<brand> getAllBrand();
 	
-	public brand getBrandById(Integer id);
+	public Optional<brand> getBrandById(Integer id);
 	
-	public brandResponseDTO getBranđDTOById(Integer id);
+	public brandResponseDTO getBrandDTOById(Integer id);
 	
 	public brandResponseDTO createBrand(brandUpdateDTO brand);
 	
