@@ -32,7 +32,7 @@ public class brand {
 		this.brandname=brandname;
 	}
 
-	@OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Collection<product> products;
 	public Integer getId() {
 		return id;

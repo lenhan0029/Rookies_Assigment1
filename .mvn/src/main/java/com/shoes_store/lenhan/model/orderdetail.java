@@ -3,6 +3,7 @@ package com.shoes_store.lenhan.model;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,20 +13,19 @@ import javax.persistence.Table;
 @Table(name="orderdetails")
 public class orderdetail {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="orderid")
 	private order order;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="quantityid")
 	private quantity quantitys;
 	private Integer quantity;
 	public orderdetail() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public orderdetail(Integer id, com.shoes_store.lenhan.model.order order,
 			com.shoes_store.lenhan.model.quantity quantitys, Integer quantity) {
@@ -59,10 +59,4 @@ public class orderdetail {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	@Override
-	public String toString() {
-		return "orderdetail [id=" + id + ", order=" + order + ", quantitys=" + quantitys + ", quantity=" + quantity
-				+ "]";
-	}
-	
 }

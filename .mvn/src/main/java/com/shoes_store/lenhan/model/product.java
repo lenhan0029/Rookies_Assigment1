@@ -4,7 +4,9 @@ import java.sql.Date;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,7 +17,7 @@ import javax.persistence.Table;
 @Table(name="products")
 public class product {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String productname;
 	private Integer price;
@@ -53,10 +55,10 @@ public class product {
 	@ManyToOne
 	@JoinColumn(name="brandid")
 	private brand brand;
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private Collection<rating> ratings;
 	
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private Collection<quantity> quantities;
 	public Integer getId() {
 		return id;

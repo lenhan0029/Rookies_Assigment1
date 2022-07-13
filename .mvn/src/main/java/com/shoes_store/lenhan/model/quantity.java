@@ -1,11 +1,12 @@
 package com.shoes_store.lenhan.model;
 
 
-import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,38 +17,53 @@ import javax.persistence.Table;
 @Table(name="quantity")
 public class quantity {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="productid")
 	private product product;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="sizeid")
 	private size size;
 	private Integer quantity;
 	
-	@OneToMany(mappedBy = "quantitys")
-	private Collection<cartdetail> cartdetails;
+	@OneToMany(mappedBy = "quantitys", fetch = FetchType.LAZY)
+	private Set<cartdetail> cartdetails;
 	
-	@OneToMany(mappedBy = "quantitys")
-	private Collection<orderdetail> orderdetails;
+	@OneToMany(mappedBy = "quantitys", fetch = FetchType.LAZY)
+	private Set<orderdetail> orderdetails;
 
 	public quantity() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public quantity(Integer id, Integer quantity, Collection<cartdetail> cartdetails) {
+
+	public quantity(Integer id, com.shoes_store.lenhan.model.product product, com.shoes_store.lenhan.model.size size,
+			Integer quantity,Set<cartdetail> cartdetails, Set<orderdetail> orderdetails) {
 		super();
 		this.id = id;
+		this.product = product;
+		this.size = size;
 		this.quantity = quantity;
 		this.cartdetails = cartdetails;
+		this.orderdetails = orderdetails;
 	}
 
+	public quantity(Integer id, com.shoes_store.lenhan.model.product product, com.shoes_store.lenhan.model.size size,
+			Integer quantity) {
+		super();
+		this.id = id;
+		this.product = product;
+		this.size = size;
+		this.quantity = quantity;
+	}
+
+	
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -61,17 +77,25 @@ public class quantity {
 		this.quantity = quantity;
 	}
 
-	public Collection<cartdetail> getCart_details() {
-		return cartdetails;
+
+	public product getProduct() {
+		return product;
 	}
 
-	public void setCart_details(Collection<cartdetail> cartdetails) {
-		this.cartdetails = cartdetails;
+
+	public void setProduct(product product) {
+		this.product = product;
 	}
 
-	@Override
-	public String toString() {
-		return "quantity [id=" + id + ", quantity=" + quantity + ", cart_details=" + cartdetails + "]";
+
+	public size getSize() {
+		return size;
 	}
-	
+
+
+	public void setSize(size size) {
+		this.size = size;
+	}
+
+
 }

@@ -1,13 +1,18 @@
 package com.shoes_store.lenhan.model;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,13 +20,19 @@ import javax.persistence.Table;
 @Table(name="accounts")
 public class account {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String username;
 	private String password;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="customerid", referencedColumnName = "id")
 	private customer customer;
+	
+	@OneToOne(mappedBy = "account")
+	private cart cart;
+	
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+	private Set<order> order;
 	
 	@ManyToOne
 	@JoinColumn(name="roleid",referencedColumnName = "id")
@@ -32,8 +43,8 @@ public class account {
 	}
 	
 
-	public account(Integer id, String username, String password, com.shoes_store.lenhan.model.customer customer,
-			com.shoes_store.lenhan.model.role role) {
+	public account(Integer id, String username, String password, customer customer,
+			role role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -84,26 +95,6 @@ public class account {
 		return "account [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
 
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(customer, id, password, role, username);
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		account other = (account) obj;
-		return Objects.equals(customer, other.customer) && Objects.equals(id, other.id)
-				&& Objects.equals(password, other.password) && Objects.equals(role, other.role)
-				&& Objects.equals(username, other.username);
-	}
 
 
 	

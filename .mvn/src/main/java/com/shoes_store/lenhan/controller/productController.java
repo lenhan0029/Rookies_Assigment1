@@ -7,8 +7,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ import com.shoes_store.lenhan.services.productService;
 
 
 @RestController
+@CrossOrigin(origins="*", maxAge= 3600)
 @RequestMapping("/product")
 public class productController {
 
@@ -40,12 +42,7 @@ public class productController {
 		this.productservice = productservice;
 		this.pr=pr;
 	}
-//	@GetMapping("/maxid")
-//	ResponseEntity<?> getMaxId() {
-//		return ResponseEntity.ok().body(this.productservice.getProductById(this.pr.MaxId()));
-//	}
 	@GetMapping
-//	@PreAuthorize("hasRole('USER') or hasRole('PM') or hasRole('ADMIN')")
 	ResponseEntity<?> getAllProducts(){
 		return ResponseEntity.ok().body(this.productservice.getAllProduct());
 	}
@@ -55,11 +52,11 @@ public class productController {
 		if(product == null) {
 			throw new productNotFoundException("product with id = " + id + "is not exists");
 		}
+		
 		return ResponseEntity.ok().body(this.productservice.getProductById(id));
 	}
 	
 	@GetMapping("/brand={id}")
-//	@PreAuthorize("hasRole('USER') or hasRole('PM') or hasRole('ADMIN')")
 	ResponseEntity<?> getProductByBrandId(@PathVariable("id") Integer id) {
 		List<product> productlist = this.productservice.getProductByBrandId(id);
 		if(productlist.isEmpty()) {
@@ -67,12 +64,15 @@ public class productController {
 		}
 		return ResponseEntity.ok().body(this.productservice.getProductByBrandId(id));
 	}
+	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	ResponseEntity<?> createProduct(@Valid @RequestBody productUpdateDTO dto) {
 		return ResponseEntity.ok().body(this.productservice.createProduct(dto));
 	}
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	ResponseEntity<?> updateProduct(@PathVariable("id") Integer id,@RequestBody productUpdateDTO dto) {
 		product product = this.productservice.getProductById(id);
 		if(product == null) {
@@ -81,6 +81,7 @@ public class productController {
 		return ResponseEntity.ok().body(this.productservice.updateProduct(id, dto));
 	}
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	ResponseEntity<?> deleteProduct(@PathVariable("id") Integer id){
 		product product = this.productservice.getProductById(id);
 		if(product == null) {

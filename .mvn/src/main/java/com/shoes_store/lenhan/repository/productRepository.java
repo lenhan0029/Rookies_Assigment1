@@ -22,6 +22,9 @@ public interface productRepository extends JpaRepository<product, Integer>{
 	@Query("select u from product u where u.productname = :productname")
 	product getProductByName(@Param("productname") String productname);
 	
+//	@Query("select u from product u limit :limit")
+//	List<product> getTopProduct(@Param("limit") Integer limit);
+	
 	@Modifying
 	@Transactional
 	@Query("delete from product p where p.id = :id")

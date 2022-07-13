@@ -2,49 +2,52 @@ package com.shoes_store.lenhan.model;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.Optional;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="orders")
 public class order {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(insertable = false, updatable = false)
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name="customerid")
-	private account customer;
+	@JoinColumn(name="customerid",referencedColumnName = "id")
+	private account account;
 	
-	@ManyToOne
-	@JoinColumn(name="employeeid")
-	private account employee;
 	private Date ordereddate;
 	private Date handleddate;
 	
 	@ManyToOne
-	@JoinColumn(name="stateid")
+	@JoinColumn(name="stateid",referencedColumnName = "id")
 	private state state;
 
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
 	private Collection<orderdetail> orderdetails;
 	public order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public order(Integer id, account customer, account employee, Date ordereddate, Date handleddate,
-			com.shoes_store.lenhan.model.state state) {
+	public order(Integer id, account account, Date ordereddate, Date handleddate,
+		state state) {
 		super();
 		this.id = id;
-		this.customer = customer;
-		this.employee = employee;
+		this.account = account;
 		this.ordereddate = ordereddate;
 		this.handleddate = handleddate;
 		this.state = state;
@@ -59,19 +62,11 @@ public class order {
 	}
 
 	public account getCustomer() {
-		return customer;
+		return account;
 	}
 
-	public void setCustomer(account customer) {
-		this.customer = customer;
-	}
-
-	public account getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(account employee) {
-		this.employee = employee;
+	public void setCustomer(account optional) {
+		this.account = optional;
 	}
 
 	public Date getOrdereddate() {
@@ -100,7 +95,7 @@ public class order {
 
 	@Override
 	public String toString() {
-		return "order [id=" + id + ", customer=" + customer + ", employee=" + employee + ", ordereddate="
+		return "order [id=" + id + ", customer=" + account + ", ordereddate="
 				+ ordereddate + ", handleddate=" + handleddate + ", state=" + state + "]";
 	}
 	

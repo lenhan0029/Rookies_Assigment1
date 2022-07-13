@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import com.shoes_store.lenhan.model.category;
 import com.shoes_store.lenhan.services.categoryService;
 
 @RestController
+@CrossOrigin(origins="*", maxAge= 3600)
 @RequestMapping("/category")
 public class categoryController {
 	
@@ -53,11 +56,13 @@ public class categoryController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	ResponseEntity<?> createCategory(@Valid @RequestBody categoryUpdateDTO dto) {
 		return ResponseEntity.ok().body(this.categoryservice.createCategory(dto));
 	}
 	
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	ResponseEntity<?> updateCategory(@PathVariable("id") Integer id,@RequestBody categoryUpdateDTO dto) {
 		category category = this.categoryservice.getCategoryById(id);
 		if(category == null) {
@@ -67,6 +72,7 @@ public class categoryController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<?> deleteCategory(@PathVariable Integer id) {
 		category category = this.categoryservice.getCategoryById(id);
 		if(category == null) {

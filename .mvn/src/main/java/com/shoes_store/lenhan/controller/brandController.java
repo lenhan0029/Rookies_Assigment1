@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import com.shoes_store.lenhan.model.brand;
 import com.shoes_store.lenhan.services.brandService;
 
 @RestController
+@CrossOrigin(origins="*", maxAge= 3600)
 @RequestMapping("/brand")
 public class brandController {
 	private brandService brandservice;
@@ -60,11 +63,13 @@ public class brandController {
 //	}
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public brandResponseDTO createBrand(@Valid @RequestBody brandUpdateDTO dto) {
 		return this.brandservice.createBrand(dto);
 	}
 	
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<?> updateBrand(@PathVariable("id") Integer id,@RequestBody brandUpdateDTO dto) {
 		Optional<brand> brand = this.brandservice.getBrandById(id);
 		if(brand.isEmpty()) {
@@ -74,6 +79,7 @@ public class brandController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<?> deleteBrand(@PathVariable("id") Integer id) {
 		Optional<brand> brand = this.brandservice.getBrandById(id);
 		if(brand.isEmpty()) {

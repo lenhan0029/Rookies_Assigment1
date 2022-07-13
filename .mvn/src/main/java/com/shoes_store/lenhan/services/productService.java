@@ -16,6 +16,8 @@ public interface productService {
 	
 	public List<product> getProductByBrandId(Integer id);
 	
+//	public List<product> getTopProduct(Integer id);
+	
 	public productResponseDTO getProductDTOById(Integer id);
 	
 	public product createProduct(productUpdateDTO dto);

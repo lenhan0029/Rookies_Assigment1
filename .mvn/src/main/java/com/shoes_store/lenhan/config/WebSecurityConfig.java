@@ -72,25 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/product/**","/api/auth/**").permitAll()
-            
-            .antMatchers("/brand/**").hasAuthority("ADMIN")
-//            .antMatchers(HttpMethod.GET,"/orders").hasAuthority("ADMIN")
-//            .antMatchers(HttpMethod.POST,"/authors").hasAuthority("ADMIN")
-//            .antMatchers(HttpMethod.PUT,"/authors/{id}").hasAuthority("ADMIN")
-//        	.antMatchers(HttpMethod.POST,"/books").hasAuthority("ADMIN")
-//        	.antMatchers(HttpMethod.PUT,"/books/{id}").hasAuthority("ADMIN")
-//        	.antMatchers(HttpMethod.DELETE,"/books/{id}").hasAuthority("ADMIN")
-//        	.antMatchers(HttpMethod.POST,"/categories").hasAuthority("ADMIN")
-//        	.antMatchers(HttpMethod.PUT,"/categories/{id}").hasAuthority("ADMIN")
-//        	.antMatchers(HttpMethod.DELETE,"/categories/{id}").hasAuthority("ADMIN")
-//        	.antMatchers(HttpMethod.GET,"/orders").hasAuthority("ADMIN")
-//            
-//        	.antMatchers(HttpMethod.PUT,"/accounts").hasAuthority("Customer")
-//        	.antMatchers(HttpMethod.POST,"/orders").hasAuthority("Customer")
-//        	.antMatchers("/customers/**").hasAuthority("Customer")
-        	
-            .anyRequest().authenticated();
+            .antMatchers("/api/auth/**").permitAll();
+//            .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

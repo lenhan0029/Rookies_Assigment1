@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class productResponseDTO {
 	private Integer id;
-	@JsonProperty("productname")
 	private String productname;
 	private Integer categoryid;
 	private Integer brandid;
